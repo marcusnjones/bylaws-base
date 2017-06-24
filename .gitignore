@@ -4,3 +4,7 @@
 
 # OSX os files
 .DS_Store
+
+# Project files
+.idea
+.idea/*
