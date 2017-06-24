@@ -1,0 +1,6 @@
+command:
+  # Verify dumb-init is installed
+  dumb-init:
+    exit-status: 1
+    stderr: []
+    stdout: []
