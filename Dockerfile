@@ -37,3 +37,5 @@ COPY ./container/root /
 
 # Run build-time tests
 RUN goss -g goss.base.yaml validate
+
+ENTRYPOINT ["/usr/bin/dumb-init", "--"]
