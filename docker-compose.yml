@@ -1,6 +1,13 @@
-ubuntu:
-  build: .
-  ports:
-   - '8080:8080'
-  environment:
-    SERVER_APP_NAME: docker-test-ubuntu
+version: '3'
+
+services:
+
+  bylaws-base:
+    container_name: bylaws-base
+    build: .
+    # environment:
+    #   MYSQL_ROOT_PASSWORD: somewordpress
+    #   MYSQL_DATABASE: wordpress
+    #   MYSQL_USER: wordpress
+    #   MYSQL_PASSWORD: wordpress
+    #   SERVER_APP_NAME: docker-test-ubuntu

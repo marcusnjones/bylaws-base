@@ -1,11 +1,33 @@
+# sudo: false
+
 sudo: required
+dist: trusty
+group: edge
+
+env:
+  DOCKER_COMPOSE_VERSION: 1.17.1
+  DOCKER_VERSION: 17.05.0~ce-0~ubuntu-trusty
+
+# Don't email me the results of the test runs.
+notifications:
+  email: false
 
 services:
   - docker
 
 before_install:
-# install goss
-- curl -L https://goss.rocks/install | sudo sh
+  - sudo apt-get update
+  - sudo apt-cache search docker
+  # List available docker versions.
+  - apt-cache madison docker-ce
+  - sudo apt-get --allow-downgrades -y -o Dpkg::Options::="--force-confnew" install docker-ce=$DOCKER_VERSION
+  - sudo rm -f /usr/local/bin/docker-compose
+  - curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > docker-compose
+  - chmod +x docker-compose
+  - sudo mv docker-compose /usr/local/bin
+  - docker-compose --version
+  # install goss
+  - curl -L https://goss.rocks/install | sudo sh
 
 script:
 - docker build .
